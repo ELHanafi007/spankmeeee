@@ -3,183 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROG STRIX SPANK - ULTIMATE EDITION</title>
+    <title>ROG STRIX - ALINA SYSTEM</title>
     <style>
         :root {
             --rog-red: #ff0032;
-            --rog-dark: #0f0f0f;
-            --rog-grey: #1a1a1a;
+            --rog-dark: #050505;
             --rog-text: #ffffff;
         }
 
         body {
             background-color: var(--rog-dark);
             color: var(--rog-text);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             text-transform: uppercase;
         }
 
         #bg-effect {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, #ff003211 0%, transparent 70%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #ff003208 0%, transparent 80%);
             pointer-events: none;
-            z-index: -1;
         }
 
         .container {
             text-align: center;
-            border: 2px solid var(--rog-red);
-            padding: 30px;
-            background: var(--rog-grey);
-            box-shadow: 0 0 30px rgba(255, 0, 50, 0.2);
-            border-radius: 5px;
             position: relative;
-            max-width: 500px;
-            width: 90%;
-            margin: 20px;
+            z-index: 10;
         }
 
         h1 {
             color: var(--rog-red);
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             margin-bottom: 5px;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 0, 50, 0.5);
+            letter-spacing: 8px;
+            text-shadow: 0 0 15px rgba(255, 0, 50, 0.4);
         }
 
         .subtitle {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            color: #666;
+            margin-bottom: 40px;
         }
 
-        .spank-surface {
-            width: 180px;
-            height: 180px;
-            border: 4px solid var(--rog-red);
-            margin: 0 auto 20px;
+        .target-area {
+            width: 280px;
+            height: 280px;
+            border: 1px solid #222;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.1s;
-            position: relative;
-            background: linear-gradient(45deg, #111, #222);
-            user-select: none;
-            touch-action: manipulation;
+            transition: 0.1s;
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 50%;
+            box-shadow: inset 0 0 20px #000;
         }
 
-        .spank-surface:active {
-            transform: scale(0.92);
-            background: var(--rog-red);
-        }
-
-        .controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        button {
-            background: transparent;
-            border: 1px solid var(--rog-red);
-            color: var(--rog-red);
-            padding: 8px;
-            cursor: pointer;
-            font-size: 0.6rem;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        button.active {
-            background: var(--rog-red);
-            color: white;
-        }
-
-        .stats {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .intensity-bar {
-            width: 100%;
-            height: 8px;
-            background: #222;
-            margin-top: 5px;
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .intensity-fill {
-            height: 100%;
-            background: var(--rog-red);
-            width: 0%;
-            transition: width 0.2s;
-            box-shadow: 0 0 10px var(--rog-red);
-        }
-
-        .mic-meter-container {
-            margin-top: 15px;
-            text-align: left;
-            font-size: 0.6rem;
-            color: #444;
-        }
-
-        .mic-meter {
-            width: 100%;
-            height: 4px;
-            background: #111;
-            margin-top: 2px;
-        }
-
-        #mic-fill {
-            height: 100%;
-            background: #00ff00;
-            width: 0%;
-        }
-
-        .sensitivity-control {
-            margin-top: 15px;
-            text-align: left;
-            font-size: 0.6rem;
-            color: #555;
-        }
-
-        input[type=range] {
-            width: 100%;
-            accent-color: var(--rog-red);
-            margin-top: 4px;
+        .target-area:active {
+            border-color: var(--rog-red);
+            background: rgba(255, 0, 50, 0.05);
         }
 
         #status-msg {
-            margin-top: 10px;
+            margin-top: 40px;
             color: var(--rog-red);
             font-weight: bold;
-            font-size: 0.9rem;
-            min-height: 1.2em;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            min-height: 1.5em;
         }
 
         .setup-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: var(--rog-dark);
             z-index: 100;
             display: flex;
@@ -187,123 +91,87 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
         }
 
         .start-btn {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border: 2px solid var(--rog-red);
+            padding: 20px 60px;
+            font-size: 1.4rem;
+            border: 1px solid var(--rog-red);
             background: transparent;
             color: var(--rog-red);
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 50, 0.3);
-            margin-top: 20px;
-            font-weight: bold;
+            letter-spacing: 4px;
+            transition: 0.3s;
         }
+
+        .start-btn:hover {
+            background: var(--rog-red);
+            color: white;
+            box-shadow: 0 0 30px var(--rog-red);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .pulse { animation: pulse 3s infinite ease-in-out; }
 
         @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+            0% { transform: translate(1px, 1px); }
+            50% { transform: translate(-2px, -1px); }
+            100% { transform: translate(1px, 1px); }
         }
 
-        .shaking {
-            animation: shake 0.2s;
-        }
+        .shaking { animation: shake 0.1s; }
     </style>
 </head>
 <body>
     <div id="bg-effect"></div>
 
     <div id="setup" class="setup-overlay">
-        <h1>ROG OPTIMIZER</h1>
-        <p style="color: #666; max-width: 300px; font-size: 0.8rem; margin-top: 10px;">
-            INITIALIZE HARDWARE SENSORS FOR ROG SPANK DETECTION.
-        </p>
-        <button class="start-btn" onclick="init()">START SYSTEM</button>
-        <p style="margin-top: 20px; color: #333; font-size: 0.6rem;">
-            OPTIMIZED FOR ASUS ROG STRIX G15 & MOBILE DEVICES
-        </p>
+        <h1 class="pulse">ALINA SYSTEM</h1>
+        <button class="start-btn" onclick="init()">INITIALIZE</button>
     </div>
 
-    <div class="container" id="main-ui">
-        <div class="subtitle">Republic of Gamers | Spank Edition</div>
-        <h1>ROG SPANKER v2.1</h1>
+    <div class="container">
+        <div class="subtitle">For Nadia's Touch Only</div>
         
-        <div class="spank-surface" id="target" onclick="manualSpank()">
-            <svg viewBox="0 0 24 24" width="60" height="60" fill="var(--rog-red)">
-                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
+        <div class="target-area" id="target" onclick="spank()">
+            <svg viewBox="0 0 24 24" width="100" height="100" fill="#111">
+                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4" />
             </svg>
         </div>
 
-        <div class="controls">
-            <button id="btn-sexy" onclick="setMode('sexy')" class="active">SEXY</button>
-            <button id="btn-pain" onclick="setMode('pain')">PAIN</button>
-            <button id="btn-halo" onclick="setMode('halo')">HALO</button>
-        </div>
-
-        <div class="mic-meter-container">
-            MIC SIGNAL STRENGTH:
-            <div class="mic-meter"><div id="mic-fill"></div></div>
-        </div>
-
-        <div class="sensitivity-control">
-            SENSITIVITY: <span id="sens-val">800</span>
-            <input type="range" id="sens-slider" min="50" max="3000" step="50" value="800" oninput="updateSensitivity(this.value)">
-        </div>
-
-        <div class="stats">
-            TOTAL SPANKS: <span id="count">0</span>
-            <div class="intensity-bar">
-                <div class="intensity-fill" id="intensity"></div>
-            </div>
-        </div>
-
-        <div id="status-msg">WAITING FOR IMPACT...</div>
+        <div id="status-msg">ARE YOU READY TO SPANK ME, NADIA?</div>
     </div>
 
     <script>
-        let mode = 'sexy';
-        let totalSpanks = 0;
         let score = 0;
         let lastTime = 0;
-        let cooldown = 450; 
         let lastSpankTime = 0;
-        let sensorThreshold = 800;
+        const cooldown = 400;
+        const decayHalfLife = 25;
+        const sensorThreshold = 400; // High sensitivity for her touch
         
-        const decayHalfLife = 20; 
         const statusMsg = document.getElementById('status-msg');
-        const countDisplay = document.getElementById('count');
-        const intensityFill = document.getElementById('intensity');
         const target = document.getElementById('target');
-        const micFill = document.getElementById('mic-fill');
 
-        const sexyMessages = ["😏 OH YEAH", "😳 HARDER", "😈 DON'T STOP", "😫 YESSS", "🤤 OH GOD"];
-
-        function updateSensitivity(val) {
-            sensorThreshold = parseInt(val);
-            document.getElementById('sens-val').innerText = val;
-        }
-
-        function setMode(newMode) {
-            mode = newMode;
-            document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('btn-' + newMode).classList.add('active');
-            statusMsg.innerText = mode.toUpperCase() + " MODE ACTIVE";
-        }
+        const phrases = [
+            "😏 OH YES, NADIA...",
+            "😳 HARDER, PLEASE",
+            "😈 DON'T STOP NOW",
+            "😫 YESSS RIGHT THERE",
+            "🥵 I'M YOURS, NADIA",
+            "🤤 MOOOORE...",
+            "😱 OH GOD YES",
+            "💦 ALMOST THERE..."
+        ];
 
         function playSound(path) {
             const audio = new Audio(path);
-            audio.play().catch(e => console.log("Audio play blocked", e));
+            audio.play().catch(() => {});
         }
 
         function spank() {
@@ -311,7 +179,6 @@
             if (now - lastSpankTime < cooldown) return;
             
             lastSpankTime = now;
-            totalSpanks++;
             
             if (lastTime > 0) {
                 const elapsed = (now - lastTime) / 1000;
@@ -320,37 +187,27 @@
             score += 1.0;
             lastTime = now;
 
-            countDisplay.innerText = totalSpanks;
+            // Visual effect
             target.classList.add('shaking');
-            setTimeout(() => target.classList.remove('shaking'), 200);
+            target.style.borderColor = "var(--rog-red)";
+            setTimeout(() => {
+                target.classList.remove('shaking');
+                target.style.borderColor = "#222";
+            }, 150);
+
+            // Audio Logic (Mapping score to 60 sounds)
+            const idx = Math.min(59, Math.floor(score * 4.5));
+            const padIdx = idx.toString().padStart(2, '0');
+            playSound(`audio/sexy/${padIdx}.mp3`);
             
-            const intensity = Math.min(100, (score / 12) * 100);
-            intensityFill.style.width = intensity + "%";
-
-            if (mode === 'sexy') {
-                const idx = Math.min(59, Math.floor(score * 4.5));
-                const padIdx = idx.toString().padStart(2, '0');
-                playSound(`audio/sexy/${padIdx}.mp3`);
-                statusMsg.innerText = sexyMessages[Math.floor(Math.random() * sexyMessages.length)];
-            } else if (mode === 'pain') {
-                const idx = Math.floor(Math.random() * 10);
-                const painFiles = ["00_Ow.mp3", "01_Ouch.mp3", "02_Owwie.mp3", "03_Hey_that_hurts.mp3", "04_Ow_stop_it.mp3", "05_What_was_that_for.mp3", "06_Ow_ow_ow.mp3", "07_Hey.mp3", "08_Yowch.mp3", "09_That_stings.mp3"];
-                playSound(`audio/pain/${painFiles[idx]}`);
-                statusMsg.innerText = "😫 OW!";
-            } else if (mode === 'halo') {
-                const idx = Math.floor(Math.random() * 9).toString().padStart(2, '0');
-                playSound(`audio/halo/${idx}.mp3`);
-                statusMsg.innerText = "SQUAD DOWN!";
-            }
-        }
-
-        function manualSpank() {
-            spank();
+            // Text feedback
+            statusMsg.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+            statusMsg.style.color = "white";
+            setTimeout(() => { statusMsg.style.color = "var(--rog-red)"; }, 300);
         }
 
         async function init() {
             document.getElementById('setup').style.display = 'none';
-            
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -363,30 +220,17 @@
                 
                 function checkAudio() {
                     analyzer.getByteFrequencyData(dataArray);
-                    
-                    // Volume detection
-                    let sum = 0;
-                    for(let i = 0; i < dataArray.length; i++) sum += dataArray[i];
-                    const volume = sum / dataArray.length;
-                    
-                    // Update mic meter
-                    micFill.style.width = Math.min(100, volume * 2) + "%";
-                    micFill.style.background = (volume * 2 > 80) ? "red" : "#00ff00";
-
-                    // Slap detection (looking for sudden sharp sounds)
-                    const highFreqPeak = Math.max(...dataArray.slice(10));
                     const peakTotal = dataArray.reduce((a, b) => a + b, 0);
 
                     if (peakTotal > sensorThreshold) {
                         spank();
                     }
-                    
                     requestAnimationFrame(checkAudio);
                 }
                 checkAudio();
-                statusMsg.innerText = "SENSORS ONLINE";
+                statusMsg.innerText = "SENSORS ONLINE. SPANK ME, NADIA.";
             } catch (err) {
-                statusMsg.innerText = "SENSOR ERROR: Use manual mode";
+                statusMsg.innerText = "SENSORS BLOCKED. TAP TO SPANK ME.";
             }
         }
     </script>
